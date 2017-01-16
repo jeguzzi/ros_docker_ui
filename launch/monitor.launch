@@ -16,6 +16,6 @@
 	</include>
 
 	<group ns="$(env HOSTNAME)">
-		<node pkg="docker_ui" type="docker_ui.py" name="docker_ui"/>
+		<node pkg="docker_ui" type="docker_ui_node.py" name="docker_ui"/>
 	</group>
 </launch>

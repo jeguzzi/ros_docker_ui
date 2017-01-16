@@ -22,7 +22,7 @@
         hostname = window.location.hostname;
 
 
-        var camera_url = "http://"+hostname+":8080/stream?topic=/"+ns+"/camera/image_raw&quality=50";
+        var camera_url = "http://"+hostname+":8080/stream?topic="+ns+"/camera/image_raw&quality=50";
         $("#camera").attr('src', camera_url);
 
         var ros = new ROSLIB.Ros({
@@ -359,7 +359,7 @@
 
         var d_listener = new ROSLIB.Topic({
             ros: ros,
-            name: '/'+ns+'/docker/containers',
+            name: ns+'/docker/containers',
             messageType: 'docker_ui/DockerContainers'
         });
         d_listener.subscribe(function(ms) {

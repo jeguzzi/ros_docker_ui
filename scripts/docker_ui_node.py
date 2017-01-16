@@ -101,8 +101,11 @@ class PC(object):
                     precpu = data["precpu_stats"]
                     cpu_delta = cpu["cpu_usage"][
                         "total_usage"] - precpu["cpu_usage"]["total_usage"]
-                    system_delta = cpu["system_cpu_usage"] - \
-                        precpu["system_cpu_usage"]
+                    try:
+                        system_delta = cpu["system_cpu_usage"] - \
+                            precpu["system_cpu_usage"]
+                    except KeyError:
+                        system_delta = 0
                     if system_delta > 0 and cpu_delta > 0:
                         c['cpu'] = cpu_delta / \
                             float(system_delta) * \
