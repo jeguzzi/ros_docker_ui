@@ -1,0 +1,8 @@
+<launch>
+	<group ns="$(env HOSTNAME)">
+	       <node pkg="web_video_server" type="web_video_server" name="web_video_server">
+	       	     <param name="quality" value="30"/>
+	       </node>
+	</group>
+</launch>
+
