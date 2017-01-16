@@ -13,9 +13,9 @@
 		<arg name="webpath" value="$(arg webpath)"/>
 	</include>
 
-	<group ns="$(env HOSTNAME)">
+	<!-- <group ns="$(env HOSTNAME)"> -->
 		<node pkg="docker_ui" type="docker_ui_node.py" name="docker_ui">
-			<rosparam param='ifaces'>$(optenv ifaces ['wlan0', 'eth0'])</rosparam>			
+			<rosparam param='ifaces' value="$(optenv ifaces ['wlan0', 'eth0'])"/>
 		</node>
-	</group>
+	<!-- </group> -->
 </launch>
