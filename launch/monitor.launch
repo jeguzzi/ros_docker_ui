@@ -15,7 +15,9 @@
 
 	<!-- <group ns="$(env HOSTNAME)"> -->
 		<node pkg="docker_ui" type="docker_ui_node.py" name="docker_ui">
-			<rosparam param='ifaces' value="$(optenv ifaces ['wlan0', 'eth0'])"/>
+			<rosparam param='ifaces' subst_value='True'>
+				$(optenv ifaces ['wlan0', 'eth0'])
+			</rosparam>
 		</node>
 	<!-- </group> -->
 </launch>
