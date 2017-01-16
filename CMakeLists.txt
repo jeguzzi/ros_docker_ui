@@ -109,7 +109,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES pioneer_outdoor
+#  LIBRARIES docker_ui
   CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
@@ -127,24 +127,24 @@ catkin_package(
 # include_directories(include)
 
 ## Declare a C++ library
-# add_library(pioneer_outdoor
-#   src/${PROJECT_NAME}/pioneer_outdoor.cpp
+# add_library(docker_ui
+#   src/${PROJECT_NAME}/docker_ui.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(pioneer_outdoor ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(docker_ui ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(pioneer_outdoor_node src/pioneer_outdoor_node.cpp)
+# add_executable(docker_ui_node src/docker_ui_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(pioneer_outdoor_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(docker_ui_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(pioneer_outdoor_node
+# target_link_libraries(docker_ui_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -167,7 +167,7 @@ catkin_install_python(PROGRAMS scripts/lcm_bridge.py
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS pioneer_outdoor pioneer_outdoor_node
+# install(TARGETS docker_ui docker_ui_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -192,7 +192,7 @@ catkin_install_python(PROGRAMS scripts/lcm_bridge.py
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_pioneer_outdoor.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_docker_ui.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
