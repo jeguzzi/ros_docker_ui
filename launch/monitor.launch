@@ -2,13 +2,11 @@
 	<node pkg="diagnostic_common_diagnostics" type="tf_monitor.py" name="tf_monitor"/>
 	<!--node pkg="diagnostic_common_diagnostics" type="sensors_monitor.py" name="sensors_monitor"/-->
 	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"></include>
-
 	<arg name="name" default="www"/>
 	<arg name="port" default="8085"/>
 	<!-- avoid to use apache default port -->
 	<arg name="webpath" default="www"/>
 	<!-- relative path to the webroot. E.g. place this foloder in the ROS package root dir -->
-
 	<include file="$(find roswww)/launch/roswww.launch">
 		<arg name="name" value="$(arg name)"/>
 		<arg name="port" value="$(arg port)"/>
@@ -16,6 +14,8 @@
 	</include>
 
 	<group ns="$(env HOSTNAME)">
-		<node pkg="docker_ui" type="docker_ui_node.py" name="docker_ui"/>
+		<node pkg="docker_ui" type="docker_ui_node.py" name="docker_ui">
+			<rosparam param='ifaces'>$(optenv ifaces ['wlan0', 'eth0'])</rosparam>			
+		</node>
 	</group>
 </launch>

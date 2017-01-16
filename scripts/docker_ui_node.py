@@ -217,7 +217,8 @@ class PC(object):
         self.updater.setHardwareID("macmini")
         self.updater.add("CPU", self.cpu_diagnostics)
         self.updater.add("Memory", self.memory_diagnostics)
-        for iface in ['wlan0', 'eth0']:
+        ifaces = rospy.get_param('~ifaces', ['wlan0', 'eth0'])
+        for iface in ifaces:
             self.updater.add("Network %s" %
                              iface, self.network_diagnostics(iface))
 
