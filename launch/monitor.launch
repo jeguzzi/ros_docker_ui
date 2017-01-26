@@ -1,4 +1,6 @@
 <launch>
+	<arg name="video" default="false"/>
+	<arg name="video_stream" default="/camera/image_raw"/>
 	<node pkg="diagnostic_common_diagnostics" type="tf_monitor.py" name="tf_monitor"/>
 	<!--node pkg="diagnostic_common_diagnostics" type="sensors_monitor.py" name="sensors_monitor"/-->
 	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"></include>
@@ -18,4 +20,8 @@
 			<rosparam param='ifaces' subst_value='True'>$(optenv ifaces ['wlan0', 'eth0'])</rosparam>
 		</node>
 	<!-- </group> -->
+	<node if="$(arg video)" pkg="web_video_server" type="web_video_server" name="web_video_server">
+		<param name="quality" value="30"/>
+		<remap from="/camera/image_raw" to="$(arg video_stream)"/>
+	</node>
 </launch>
