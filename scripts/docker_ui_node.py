@@ -143,7 +143,10 @@ class PC(object):
         return update
 
     def cpu_diagnostics(self, stat):
-        cpu = psutil.cpu_percent()
+        try:
+            cpu = psutil.cpu_percent()
+        except AttributeError:
+            return stat
         if cpu > 80:
             stat.summary(diagnostic_msgs.msg.DiagnosticStatus.WARN,
                          "Using almost all cpu")
@@ -153,7 +156,10 @@ class PC(object):
         return stat
 
     def memory_diagnostics(self, stat):
-        mem = psutil.phymem_usage()
+        try:
+            mem = psutil.phymem_usage()
+        except AttributeError:
+            return stat
         if mem.percent > 80:
             stat.summary(diagnostic_msgs.msg.DiagnosticStatus.WARN,
                          "Using almost all memory")
@@ -179,7 +185,10 @@ class PC(object):
                 stat.summary(diagnostic_msgs.msg.DiagnosticStatus.ERROR,
                              "%s is down, no ip assigned" % iface)
                 return stat
-            net = psutil.network_io_counters(pernic=True).get(iface)
+            try:
+                net = psutil.network_io_counters(pernic=True).get(iface)
+            except AttributeError:
+                return stat
             if net.errin or net.errout:
                 stat.summary(
                     diagnostic_msgs.msg.DiagnosticStatus.ERROR,
@@ -191,6 +200,7 @@ class PC(object):
                 stat.summary(diagnostic_msgs.msg.DiagnosticStatus.OK, "Ok")
             for k, v in net._asdict().items():
                 stat.add(k, v)
+            return stat
         return update
 
     def update_diagnostics(self, event):
@@ -212,7 +222,7 @@ class PC(object):
         rospy.init_node('pc_controller', anonymous=False)
 
         self.cli = Client(
-            base_url='unix://var/run/docker.sock', version='1.24')
+            base_url='unix://var/run/docker.sock', version='auto')
         self.updater = diagnostic_updater.Updater()
         self.updater.setHardwareID("macmini")
         self.updater.add("CPU", self.cpu_diagnostics)
@@ -242,6 +252,8 @@ class PC(object):
                           request.name, request.policy, request.max_retry))
 
         rospy.spin()
+
+
 if __name__ == '__main__':
     try:
         PC()

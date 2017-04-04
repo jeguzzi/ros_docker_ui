@@ -1,0 +1,7 @@
+version: '2'
+services:
+  docker-ui:
+     build:
+        dockerfile: docker/armhf/Dockerfile
+        context: ../..
+     image: jeguzzi/df:armhf-docker-ui
